@@ -8,6 +8,13 @@ Twist::Application.routes.draw do
     scope module: "accounts" do
       root to: "books#index", as: :account_root
 
+      resources :invitations, only: [:new, :create] do
+        member do
+          get :accept
+          patch :accepted
+        end
+      end
+
       notes_routes = lambda do
         collection do
           get :completed
@@ -36,12 +43,6 @@ Twist::Application.routes.draw do
         end
 
         resources :notes, &notes_routes
-      end
-      resources :invitations, only: [:new, :create] do
-        member do
-          get :accept
-          patch :accepted
-        end
       end
     end
   end
