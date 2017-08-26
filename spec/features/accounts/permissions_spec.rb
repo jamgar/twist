@@ -49,6 +49,8 @@ feature "Account permissions" do
 
     scenario "is not permitted to access the account" do
       visit root_url
+# commented out because the flash message is not appearing
+# I have reported in issue on github.
 #      expect(page).to have_content("You are not permitted to view that account.")
       expect(page.current_url).to eq(root_url(subdomain: nil))
     end
