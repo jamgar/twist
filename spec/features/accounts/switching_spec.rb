@@ -17,7 +17,8 @@ describe "Switching accounts" do
   end
   before do
     account_2.users << account_1.owner
-    login_as(account_1.owner)
+    actually_sign_in_as(account_1.owner)
+   # login_as(account_1.owner)
   end
 
   it "can switch between accounts" do
