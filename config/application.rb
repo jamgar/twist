@@ -4,7 +4,6 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "rails/test_unit/railtie"
-
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -12,7 +11,6 @@ Bundler.require(*Rails.groups)
 module Twist
   class Application < Rails::Application
     config.active_job.queue_adapter = :sidekiq
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -42,5 +40,8 @@ module Twist
     config.assets.enabled = true
 
     config.cache_store = :redis_store
+
+    require "apartment/elevators/subdomain"
+    config.middleware.use Apartment::Elevators::Subdomain
   end
 end
